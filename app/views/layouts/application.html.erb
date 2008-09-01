@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <title><%= 'zi2 ' + (@title || '') %></title>
+	<link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">    
+	<!--[if IE]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+  <%# bundle do %>
+	  <%= stylesheet_link_tag 'zi2/common', 'menu', 'zi2/button' %>
+	  <%= stylesheet_link_tag 'application' %>
+	  <%= javascript_include_tag 'jquery', 'jquery-ui', 'jrails' %>
+	  <%= javascript_include_tag 'jquery.form.js' %>
+		<%= javascript_include_tag 'application' %>
+	<%# end %>
+	<%= yield :head -%>
+	<%= yield :jquery_onload -%>
+</head>
+<body id="main">
+
+	<div class="container">
+	  <div id="header" class="span-24">
+			<%= render :partial => 'layouts/zi2/top_menu' %>
+			<h1 id="logo"><a href="/"><%= image_tag('zi2/logo.gif', :alt => 'zi2') %></a></h1>
+			<%= render :partial => 'layouts/top_nav' %>
+	  </div>
+	  <div id="content" class="span-24">
+		  <div class="span-6">
+				<div class="sidebox" id="userbox">
+					<ul><li>뭐가 들어가면 좋을까?</li></ul>
+				</div>
+		  	<%= render :partial => 'side_nav' %>
+		  </div>
+		  <div id="<%= controller.controller_name + '_' + controller.action_name %>" class="span-18 last">
+		  	<% if flash[:notice] %>
+					<p class="notice">
+						<%= flash[:notice] %>
+						<%#= link_to_function '[x]', '$(this).parent().remove();' %>
+					</p>
+				<% end %>
+				<%= yield  %>
+		  </div>
+	  </div>
+	  <div id="footer" class="span-24 right">
+	  	&copy; <a href="http://yourcompany.com">Your Company</a>, 2008, All right reserved.
+	  	&nbsp;<em>Powerd by</em> 
+			<div id="zi2link">
+				<a href="http://code.google.com/p/zi2/"><span>zi<em>2</em></span></a>
+			</div>
+	  </div>
+	</div>
+
+</body>
+</html>
+

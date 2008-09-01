@@ -1,0 +1,25 @@
+<% content_for :head do %>
+	<%= javascript_include_tag 'jquery.validate' %>
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			$('#new_user').validate({
+				success: function(label) { 
+	        // set   as text for IE 
+	        label.html(" ").addClass("checked"); 
+        }
+			});
+		})
+	</script>
+<% end %>
+
+<p><label for="avatar">사진</label><br/>
+<%= form.file_field :avatar %></p>
+
+<p><label for="email">이메일주소</label><br/>
+<%= form.text_field :email, :class => 'required email' %></p>
+
+<p><label for="password">비밀번호</label><br/>
+<%= form.password_field :password, :class => 'required' %></p>
+
+<p><label for="password_confirmation">비밀번호(확인)</label><br/>
+<%= form.password_field :password_confirmation, :class => 'required', :equalTo => '#user_password' %></p>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <title><%= @page_title || 'zi2' %></title>
+	<link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print">    
+	<!--[if IE]><link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+  <%# bundle do %>
+	  <%= stylesheet_link_tag 'zi2/common', 'zi2/grid_forms', 'zi2/menu', 'zi2/button' %>
+	  <%= stylesheet_link_tag 'zi2/admin' %>
+	  <%= javascript_include_tag 'jquery', 'jquery-ui', 'jrails' %>
+	  <%= javascript_include_tag 'jquery.form.js' %>
+		<%= javascript_include_tag 'application' %>
+	<%# end %>
+	<%= yield :head -%>
+	<%= yield :jquery_onload -%>
+</head>
+<body id="admin">
+
+	<div class="container">
+	  <div id="header" class="span-24">
+			<%= render :partial => 'layouts/zi2/top_menu' %>
+			<h1 id="logo"><a href="/"><%= image_tag 'zi2/logo.gif', :alt => 'zi2' %></a></h1>
+			<%= render :partial => 'layouts/zi2/admin_top_nav' %>
+	  </div>
+	  <div id="content" class="span-24">
+		  <div id="mainContent" class="span-18">
+		  	<% if flash[:notice] %>
+					<p class="notice"><%= flash[:notice] %></p>
+				<% end %>
+				<%= yield  %>
+		  </div>
+		  <div class="span-6 last">
+		  	<%= yield :sidebox %>
+		  </div>
+	  </div>
+	  <div id="footer" class="span-24" style="text-align: right;">
+	  	&copy; <a href="http://usefulparadigm.com">Useful Paradigm</a>, 2008, All right reserved.
+	  </div>
+	</div>
+
+</body>
+</html>
+

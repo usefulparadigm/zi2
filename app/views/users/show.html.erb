@@ -1,0 +1,53 @@
+<%= page_title @title + ' 프로파일' %>
+
+<div id="profile">
+	<div id="avatar" class="thumb"><%= image_tag(@user.avatar.url(:thumb)) %></div>
+	<ul>
+		<li><span>아이디</span>: <%= @user.login %></li>
+		<li><span>이메일</span>: <%= @user.email %></li>
+	</ul>
+	<% if @user == current_user %>
+		<%= button_link_to '편집', edit_user_path %>
+	<% else %>
+		<% unless @user.is_friends_or_pending_with? current_user %>
+		<%= button_link_to '지인맺기 요청', ask_user_friendship_path(current_user, @user), :method => :put %>
+		<% else %>
+			<% if @user.is_friends_with? current_user %>
+				<div>지인관계</div>
+			<% elsif @user.is_pending_friends_with? current_user %>
+				<div>친구맺기 요청 중</div>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+
+<br/>
+
+<%= page_title @title + ' 작성한 글들' %>
+
+<div>
+	<span id="post-count"><%= @post_total %></span> 개의 글이 있습니다.</span>
+	<%= link_to image_tag('rss.gif'), formatted_posts_path(:rss, params) %>	
+	<table>
+	  <tr style="background: #eef;">
+	    <th><%= s :category_id, :label => '분류' %></th>
+	    <th><%= s :title, :label => '제목' %></th>
+	    <th><%= image_tag 'paperclip.gif' %></th>
+	    <th><%= s :comments_count, :label => '댓글', :descend => true %></th>
+	    <th><%= s :read_count, :label => '조회', :descend => true %></th>
+	    <th><%= s :diggs_count, :label => '추천', :descend => true %></th>
+	    <th>관리</th>
+	  </tr>
+		<%#= render :partial => 'zi2/posts/post', :collection => @posts %>
+	</table>
+
+	<p id="pagination">
+		<%= will_paginate @posts, :prev_label => '이전', :next_label => '다음' %>
+	</p>
+
+	<div class="right">
+		<%= button_link_to "새글작성", new_post_path(:category_id => @category_id) %>
+	</div>
+
+</div>
+

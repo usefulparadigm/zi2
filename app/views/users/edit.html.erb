@@ -1,0 +1,19 @@
+<%= page_title '사용자 프로파일 변경' %>
+
+<%= error_messages_for :user %>
+<div id="avatar" class="prepend-1 span-4">
+	<%= image_tag @user.avatar.url %>
+</div>
+
+<div class="span-13 last">
+	<% form_for(@user, :html => { :multipart => true }) do |f| -%>
+		<p><label for="login">로그인ID</label><br/>
+		<%#= f.text_field :login, :readonly => true %>
+		<%= @user.login %>
+	</p>
+
+		<%= render :partial => 'form', :object => f %>
+	
+		<p><%= submit_tag '저장' %></p>
+	<% end -%>
+</div>

@@ -1,0 +1,4 @@
+<div class="profile_image">
+	<div class="image"><%= link_to image_tag(profile.avatar.url(:thumb)), user_path(profile), :title => profile %></div>
+  <div class="name"><%= link_to profile, user_path(profile) %></div>
+</div>
