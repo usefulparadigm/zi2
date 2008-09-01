@@ -1,0 +1,11 @@
+<%= page_title "\"#{@group.title}\" 수정" %>
+
+<% af_form_for(@group, :url => admin_group_path(@group), :html => { :method => :put}) do |f| %>
+	<%= render :partial => 'form', :object => f %>
+
+	<div class="right clear">
+		<%= link_to span_tag('취소'), admin_groups_path, :class => 'button' %>
+    <span class="button"><%= f.bare_submit "생성" %></span>
+	</div>
+<% end %>
+

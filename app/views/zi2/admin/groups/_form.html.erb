@@ -1,0 +1,6 @@
+<%= form.error_messages %>
+
+<%= form.text_field :title, :size => 30, :label => '그룹명', :required => true %>
+<%= form.text_field :name, :size => 18, :label => '그룹ID', :required => true, 
+										:continue => true, :note => '(unique)' %>
+<%= form.text_area :description, :rows => 3, :label => '설명', :note => '이 게시판 그룹에 대한 간단한 설명' %>

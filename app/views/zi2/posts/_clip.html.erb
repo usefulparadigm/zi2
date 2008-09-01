@@ -1,0 +1,8 @@
+<li id="clip_<%= clip.id %>">
+	<div class="add_to_content"><%= link_to_function '본문에 삽입', "insertClipToBody('#{clip.public_filename}', #{clip.id});" %></div>
+	<div><a href="#">다운로드</a></div>
+	<div class="delete_clip"><%= link_to_remote '삭제', :url => clip_path(clip), :method => :delete %></div>
+	<div class="filesize"><%= sprintf("%5.1f", clip.size/1024.0) %>KB</div>
+	<div class="filename"><%= link_to clip.filename, clip.public_filename %></div>
+	<%= hidden_field_tag 'post[new_clips][]', clip.id %>
+</li>

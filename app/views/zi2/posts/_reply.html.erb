@@ -1,0 +1,17 @@
+<li class="reply" id="reply_<%= reply.id %>">
+	<div class="reply_header">
+		<div class="author">
+			<%= reply.user ? link_to(reply.user.login, user_path(reply.user)) : 
+											 reply.homepage.empty? ? reply.author : link_to(reply.author, reply.homepage) %>
+		</div>
+		<div class="date_and_ip">
+			<div class="date"><%= reply.created_at.to_s(:db) %></div>
+			<!-- TODO: Refactoring with :anchor option!! -->
+			<div class="permlink"><%= link_to '#', gbp_path(@post) + "#reply_#{reply.id}" %></div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="body">
+		<%= reply.body %>
+	</div>
+</li>

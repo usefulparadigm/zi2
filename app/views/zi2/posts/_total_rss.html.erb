@@ -1,0 +1,5 @@
+<div class="postCount float left"><%= @post_total %> 개의 글이 있습니다</div>
+<%= link_to image_tag('zi2/rss.gif'), 
+						formatted_posts_path(:rss, params), 
+						:class => 'float right' %>	
+<div class="clear"></div>

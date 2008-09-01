@@ -1,0 +1,7 @@
+<div id="pagination" class="float left">
+	<%= will_paginate @posts, :prev_label => '이전', :next_label => '다음' %>
+</div>
+
+<div class="float right">
+	<%= button_link_to "새글작성", new_gbp_path(@board) %>
+</div>

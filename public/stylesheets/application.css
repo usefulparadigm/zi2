@@ -1,0 +1,150 @@
+/*.container {width:990px;}*/
+#main .pagination span.current {
+  background-color: gray;
+}
+
+#main { margin-top: 0; }
+#topmenu {
+    margin: 0;
+    padding: 10px 5px;
+    list-style: none;
+    float: right;
+}
+#topmenu li {
+    display: inline;   
+    padding-left: 3px;
+}
+#logo {
+    margin: 0; padding: 0;
+}
+
+/* Forum */
+.css1 { font-size: 0.8em; }
+.css2 { font-size: 1.0em; }
+.css3 { font-size: 1.2em; }
+.css4 { font-size: 1.4em; }
+
+#tag_cloud {
+	background: #ccccff url(/images/bg-round-bottom.gif) no-repeat bottom left;
+	width: 710px;
+	margin-bottom: 5px;
+}
+#tag_cloud dt {
+	background: url(/images/bg-round-top.gif) no-repeat;
+	padding: 5px 10px;
+	margin: 0;
+}
+
+#tag_cloud a {
+	color: #6666ff;
+  text-decoration: none;
+}
+#tag_cloud a:hover {
+	color: #fff;
+	background: #6666ff;
+}
+
+/* News */
+#content .post-list {
+	clear:both;
+	float:left;
+	width: 97%;
+	padding: 10px 0;
+	margin: 0 5px;
+	border-bottom: 1px dashed silver;
+}
+#content .post-list dt {
+	float:left;
+	margin: 0pt;
+}
+#content .post-list dt a {
+	color:#333333;
+	font-weight: bold;
+	letter-spacing:-1px;
+}
+#content .post-list .blog-link {
+	margin-left: 10px;
+	color:#CCCCCC;
+	display: inline;
+	font-size: 11px;
+}
+#content .post-list .blog-link a {
+	color:#999999;
+	font-size:11px;
+}
+#content .post-list .blogtitle {
+	color:#333333;
+}
+#content .post-list .date {
+	color:#999999;
+}
+#content .post-list .image {
+	background:transparent url(/images/bg_border1.gif) no-repeat scroll 0%;
+	float:left;
+	height: 70px;
+	margin: 0 5px;
+	padding: 5px 0pt 0pt 4px;
+	width:78px;
+}
+#content .post-list .image div.image_wrap {
+	height:65px;
+	overflow:hidden;
+	width:70px;
+}
+#content .post-list .desc {
+	color:#666666;
+	font-size:1em;
+	line-height:1.3em;
+	padding-top:2px;
+}
+#content .post-list .tag {
+	background:transparent url(/images/icon_tag.gif) no-repeat scroll 0%;
+	height:15px;
+	margin:5px 0pt 0pt;
+	overflow:hidden;
+	padding:0pt 0pt 0pt 27px;
+}
+#content .post-list .tag a {
+	color:#999999;
+}
+#content .post-list .tag .matched {
+	font-weight:bold;
+	letter-spacing:-1px;
+}
+
+/* CSS for communityList */
+.board_list {
+}
+.board_list h3 {
+	border: 2px solid silver;
+	padding: 5px 10px 5px 5px;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 5px 0;
+	height: 14px;
+	background: url(/images/bg_list_title.gif) repeat-x;
+	letter-spacing:-1px;
+}
+.board_list h3 a {
+  text-decoration: none;
+  padding-left: 15px;
+  background: url(/images/icon_article.gif) no-repeat left center;
+}
+.board_list li {
+	padding: 2px;
+}
+
+.board_list li span {
+	font-size: 0.9em;
+}
+.board_list .created_date {
+	color: gray;
+	padding-right: 5px;
+}
+.board_list .comments_count {
+	padding-left: 12px;
+	margin-left: 5px;
+	background: url(/images/icon_comments.gif) no-repeat left center;
+	color: red;
+}
+

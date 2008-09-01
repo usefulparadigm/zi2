@@ -1,0 +1,98 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'xq_ui.css' %>
+	<%= javascript_include_tag 'Full_merged' %>
+ 	<script type="text/javascript">//<![CDATA[
+  var xed;
+  window.onload = function() {
+		xed = new xq.Editor("xq_editor");
+		xed.config.contentCssList = ["/stylesheets/xq_contents.css"];
+		xed.config.imagePathForDefaultToolbar = '/images/toolbar/'
+		xed.setEditMode('wysiwyg');
+  }
+  function insertClipToBody(file_url, clip_id) {
+		var doc = xed.getDoc();
+		var block = doc.createElement("p");
+		var img = doc.createElement("img");
+		img.src = file_url;
+		block.appendChild(img);
+		doc.body.appendChild(block);    	
+  }
+  function uploadClip(uploadUrl) {
+		var form = $('#post_form');
+		var orgUrl = form.attr('action');
+		var hiddenMethod = $('input[name=_method]', form);
+		var orgMethod = hiddenMethod.val();
+		$('.indicator').show();
+		hiddenMethod.val('post');
+		form.attr({action: uploadUrl, target: 'upload_frame'}).submit()
+				.attr({action: orgUrl, target: ''});
+		hiddenMethod.val(orgMethod);		
+  }
+  function finishUpload() {
+		$('.indicator').hide();
+		$('#uploaded_data').attr('value', '');  	
+  }
+  function abortUpload(msg) {
+  	alert('죄송합니다. 뭔가 잘못되었습니다.\n' 
+  				+ msg + '\n다시 한번 시도해 주세요.');
+		finishUpload();  	
+  }
+  //]]></script>
+<% end %>
+
+<%= form.error_messages %>
+
+<div id="titleArea">
+	<%= form.label :title, '제목' %>
+	<%= form.text_field :title, :size => 70 %>
+</div>
+<div id="categoryArea">
+  <%= form.label :category_id, '분류' %>
+	<!--select name="post[category_id]">
+	  <%#= expand_tree_into_select_field(Category.top, params[:category_id]) %>
+	</select-->
+</div>
+<div id="publicArea">
+  <%= form.label :category_id, '공개도' %>
+	<select name="category_id">
+		<option>전체공개</option>
+		<option>회원공개</option>
+		<option>지인공개</option>
+		<option>비밀글</option>
+	</select>
+</div>
+<div id="contentArea">
+	<%= form.label :content, '내용' %>
+	<%= form.text_area :content, :id => 'xq_editor', :rows => 10 %>
+</div>
+
+<% if logged_in? && current_user.admin? %>
+	<p>
+    <%= form.check_box :sticky %>
+		<label for="sticky">공지글(목록 상단에 위치)</label>
+	</p>
+<% end %>
+
+<div id="attachArea">
+	<%= label_tag 'uploaded_data', '첨부파일' %>
+	<ul id="clipList">
+	  <% @post.clips.each do |clip| %>
+	    <%= render :partial => 'clip', :object => clip %>
+	  <% end %>  
+	</ul>  
+	<iframe id="upload_frame" name="upload_frame" style="width: 0px; height: 0px; border: 0px;" url="about:blank"></iframe>
+	<div id="uploadControl">
+		<%#= file_field_tag 'clip[uploaded_data]', :id => 'uploaded_data' %>
+		<%= file_field_tag 'clip', :id => 'uploaded_data' %>
+		<%= link_to_function span_tag('업로드'), 
+		 										 "uploadClip('/posts/upload.js')", 
+												 #"uploadClip('#{formatted_upload_posts_path(:format => :js)}')", 
+												 :class => 'button' %>
+		<%= image_tag 'zi2/indicator.gif', :class => 'indicator hidden' %>
+	</div>
+</div>
+
+<div id="tagArea">
+	<%= form.label :tag_list, '태그 <em>(공백으로 구분)</em>' %>
+	<%= form.text_field :tag_list, :size => 60 %>	
+</div>

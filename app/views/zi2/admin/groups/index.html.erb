@@ -1,0 +1,33 @@
+<% content_for :sidebox do %>
+	<%#= render :partial => 'side_nav' %>
+<% end %>
+
+<%= page_title '그룹 관리' %>
+
+<table>
+  <tr>
+  	<th><%= s :title, :label => '제목' %></th>
+  	<th><%= s :name, :label => '그룹명(ID)' %></th>
+  	<th>설명</th>
+  	<th><%= s :boards_count, :label => '게시판 수', :descend => true %></th>
+  	<th colspan="3">액션</th>
+  </tr>
+
+<% for group in @groups %>
+  <tr>
+  	<td><%= group.title %></td>
+  	<td><%= group.name %></td>
+  	<td><%= truncate(group.description, 25) %></td>
+  	<td><%= group.boards_count %></td>
+    <td><%= link_to 'Show', admin_boards_path(:group => group.id) %></td>
+    <td><%= link_to 'Edit', edit_admin_group_path(group) %></td>
+    <td><%= link_to 'Destroy', admin_group_path(group), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<p id="pagination">
+	<%= will_paginate @groups, :prev_label => '이전', :next_label => '다음' %>
+</p>
+
+<%= link_to span_tag('새 그룹'), new_admin_group_path, :class => 'button' %>

@@ -1,0 +1,77 @@
+
+	<!--div id="diggbox">
+		<h5><%#= link_to '추천', digg_post_path(@post), :method => :put %></h5>
+		<span><%= @post.diggs.count %></span>
+	</div-->
+
+<div id="originalPost">
+	<div class="postHeader">
+		<div class="titleAndUser">
+			<div class="title">
+					<h4><%= link_to @post.title, gbp_path(@post) %></h4>
+			</div>
+			<div class="userInfo">
+			  <div class="author">작성자: <%= link_to @post.user, user_path(@post.user) %></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="tagList float left"><%= @post.tag_list.join(', ') %></div>
+		<div class="dateAndCount">
+		  <div class="commentCount">댓글수: <%#= @post.comments_count %></div>
+		  <div class="readCount">조회수: <%= @post.read_count %></div>
+		  <div class="date">작성일: <%= @post.created_at.to_s(:klong) %></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="postBody">
+		<div class="contentBody xed">
+			<%= @post.content %>
+		</div>
+	</div>
+
+	<% if @post.clips.count > 0 %>
+		<ul class="attachments">
+		<% @post.clips.each do |clip| %>
+			<li>
+				<%= image_tag 'zi2/paperclip.gif' %>
+				<%= link_to clip.filename, clip.public_filename %>
+			</li>
+		<% end %>
+		</ul>
+	<% end %>
+
+	<div class="actionControl">
+		<%= link_to span_tag('목록'), gb_path(@post.board), :class => 'button' %>
+		<% if logged_in? && @post.user == current_user %>
+			<%= link_to span_tag('수정'), edit_gbp_path(@post), :class => 'button' %>
+			<%= link_to span_tag('삭제'), post_path(@post), :method => :delete, :confirm => 'Are you sure?', :class => 'button' %>
+		<% end %>
+	</div>
+</div>	
+
+<div id="reply_area">
+	<ul id="reply_list">				
+		<% unless @post.replies.empty? %>
+			<%= render :partial => 'zi2/posts/reply', :collection => @post.replies.public_only %>
+		<% else %>
+			<li class="empty">첫번째 댓글의 주인공이 되세요.</li>
+		<% end %>
+	</ul>
+	<div id="new_reply">
+		<% form_for :reply, :url => post_replies_path(@post) do |f| %>
+			<%= f.error_messages %>
+			<% unless logged_in? %>
+				<%= f.label :author, '작성자<em>*</em> ' %><%= f.text_field :author, :size => 15 %>
+				<%= f.label :author, '비밀번호 ' %><%= f.password_field :password, :size => 10 %>
+				<%= f.label :homepage, '홈페이지 ' %><%= f.text_field :homepage %>
+			<% end %>
+			<%= f.text_area :body %>
+			<%= f.check_box :secret %><%= f.label :secret, '비밀글' %>
+			<div class="right"><span class="button"><%= f.submit '댓글 등록' %></span></div>
+		<% end %>
+	</div>
+</div>						
+
+<%#= render :partial => 'zi2/posts/post', :object => @post.next unless @post.next %>
+<%#= render :partial => 'zi2/posts/post', :object => @post.previous unless @post.previous %>

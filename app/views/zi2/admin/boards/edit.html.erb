@@ -1,0 +1,10 @@
+<%= page_title "\"#{@board.title}\" 수정" %>
+
+<% af_form_for(@board, :url => admin_board_path(@board.id), :html => { :method => :put}) do |f| %>
+	<%= render :partial => 'form', :object => f %>
+  <p>
+    <%= f.submit "저장" %>
+  </p>
+<% end %>
+
+<%= link_to '취소', admin_boards_path %>

@@ -1,0 +1,7 @@
+<%
+	action_name = controller.action_name #== 'index' ? 'index' : 'show'
+%>
+<div class="notice">
+	If you override this view, you can put <strong><%= action_name %>.html.erb</strong> in your 
+	<em style="color: navy;">app/views/<%= controller.controller_name %></em> directory.
+</div>

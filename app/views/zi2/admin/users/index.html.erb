@@ -1,0 +1,32 @@
+<%= page_title '사용자 관리' %>
+
+<div id="selectArea" class="right">
+	<form>
+		<select>
+			<option value="id">ID</option>
+			<option value="email">이메일</option>
+		</select>
+		<%= text_field_tag 'key' %>
+		<%= submit_tag '검색' %>
+	</form>
+</div>
+
+<table>
+	<tr>
+		<th>No</th>
+		<th>사진</th>
+		<th>사용자ID</th>
+		<th>이메일주소</th>
+		<th>권한</th>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%= user.id %></td>
+		<td><%= image_tag user.avatar.url(:thumb) %></td>
+		<td><%= user.login %></td>
+		<td><%= user.email %></td>
+		<td><%= user.roles.map(&:name).join(', ') %></td>
+	</tr>
+	<% end %>
+</table>
+

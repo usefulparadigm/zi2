@@ -1,0 +1,36 @@
+<%= page_title '게시판 관리' %>
+
+<div id="selectArea" class="right">
+	<strong>그룹</strong>
+	<%= select("board", "group_id", Group.options, 
+			{ :selected => params[:group].to_i, :include_blank => '전체' }, 
+			:onchange => "location='#{admin_boards_url}?group='+this.options[this.selectedIndex].value;") %>
+</div>
+
+<table>
+  <tr>
+  	<th><%= s :title, :label => '제목' %></th>
+  	<th><%= s :board_id, :label => '게시판ID' %></th>
+  	<th>설명</th>
+  	<th><%= s :posts_count, :label => '포스트', :descend => true %></th>
+  	<th colspan="3">액션</th>
+  </tr>
+
+<% for board in @boards %>
+  <tr>
+  	<td><%= board.title %></td>
+  	<td><%= board.name %></td>
+  	<td><%= truncate(board.description, 25) %></td>
+  	<td><%= board.posts_count %></td>
+    <td><%= link_to '바로가기', admin_boards_path(:group => board.group) %></td>
+    <td><%= link_to '수정', edit_admin_board_path(board) %></td>
+    <td><%= link_to '삭제', admin_board_path(board), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<p id="pagination">
+	<%= will_paginate @posts, :prev_label => '이전', :next_label => '다음' %>
+</p>
+
+<%= link_to span_tag('새 게시판'), new_admin_board_path(:group => params[:group]), :class => 'button' %>

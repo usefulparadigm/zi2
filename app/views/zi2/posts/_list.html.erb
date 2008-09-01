@@ -1,0 +1,19 @@
+<div>
+	<%= render :partial => 'total_rss' %>
+	<table>
+	  <tr>
+	    <th><%= s :board_id, :label => '게시판' %></th>
+	    <th><%= s :'posts.title', :label => '제목' %></th>
+	    <th><%= s :user_id, :label => '작성자' %></th>
+	    <th><%= s :replies_count, :label => '댓글', :descend => true %></th>
+	    <th><%= s :read_count, :label => '조회', :descend => true %></th>
+	    <th><%= s :diggs_count, :label => '추천', :descend => true %></th>
+	    <th><%= s :created_at, :label => '작성일' %></th>
+	  </tr>
+		<%= render :partial => 'zi2/posts/post', :collection => @posts %>
+	</table>
+
+	<div id="pagination">
+		<%= will_paginate @posts, :prev_label => '이전', :next_label => '다음' %>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+<%= render :partial => 'total_rss' %>
+<table>
+  <tr>
+  	<th>No.</th>
+    <th><%= s :title, :label => '제목' %></th>
+    <th><%= s :user_id, :label => '작성자' %></th>
+    <th><%= s :comments_count, :label => '댓글', :descend => true %></th>
+    <th><%= s :read_count, :label => '조회', :descend => true %></th>
+    <th><%= s :diggs_count, :label => '추천', :descend => true %></th>
+    <th><%= s :created_at, :label => '작성일' %></th>
+  </tr>
+	<%= render :partial => 'zi2/posts/post', :collection => @posts %>
+</table>
+
+<%= render :partial => 'paginate_new' %>

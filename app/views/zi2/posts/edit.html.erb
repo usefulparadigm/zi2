@@ -1,0 +1,7 @@
+<% form_for(@post, :html => { :multipart => true, :id => 'post_form' }) do |f| %>
+	<%= render :partial => 'form', :object => f %>	
+	<div id="submitArea">
+		<%= link_to span_tag('취소'), gb_path(@board), :class => 'button' %>
+		<span class="button"><%= f.submit "완료" %></span>
+	</div>
+<% end %>

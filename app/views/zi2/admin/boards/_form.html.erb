@@ -1,0 +1,6 @@
+<%= form.error_messages %>
+
+<%= form.text_field :title, :size => 30, :label => '이름', :required => true %>
+<%= form.text_field :name, :size => 18, :label => '게시판ID', :required => true, :continue => true %>
+<%= form.text_area :description, :rows => 3, :label => '설명', :note => '이 게시판에 대한 간단한 설명 또는 공지사항' %>
+<%= form.select :group_id, Group.options, :label => '그룹', :required => true %>

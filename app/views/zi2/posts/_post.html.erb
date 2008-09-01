@@ -1,0 +1,23 @@
+<tr>
+	<% if list_view? %>
+	  <td><%= link_to post.board.title, gb_path(post.board) %></td>
+	<% else %>
+		<td><%= @start_no - post_counter + 1 %></td>	
+	<% end %>
+  <td>
+  	<% if post.sticky %>
+  		<span class="sticky">
+		  	<%= link_to post.title, post %>
+  		</span>
+		<% else %>
+	  	<%= link_to post.title, gbp_path(post) %>
+		<% end %>
+	</td>
+  <% unless controller.controller_name == 'users' %>
+	  <td><%= link_to post.user, user_path(post.user.to_s) %></td>
+  <% end %>
+	<td><%= post.replies_count %></td>
+  <td><%= post.read_count %></td>
+  <td><%= post.diggs_count %></td>
+  <td><%= created_date(post) %></td>
+</tr>

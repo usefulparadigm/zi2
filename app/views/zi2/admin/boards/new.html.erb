@@ -1,0 +1,12 @@
+<%= page_title '새 게시판 만들기' %>
+
+<% af_form_for(@board, :url => admin_board_path(@board)) do |f| %>
+	<%= render :partial => 'form', :object => f %>
+
+<div class="right clear">
+	<%= link_to span_tag('목록'), admin_boards_path, :class => 'button' %>
+  <span class="button"><%= f.bare_submit "생성" %></span>
+</div>
+
+<% end %>
+

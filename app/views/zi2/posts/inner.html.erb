@@ -1,0 +1,7 @@
+<% inside_layout 'application' do -%>
+	<% content_for :sidebox do %>
+		<%= render :partial => 'side_nav' %>
+	<% end %>
+	<%= render :partial => 'title', :object => @title unless @title.blank? %>
+  <%= yield %>
+<% end -%>

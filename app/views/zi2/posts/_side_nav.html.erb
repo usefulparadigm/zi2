@@ -1,0 +1,10 @@
+<div>
+	<ul class="sideNav" id="<%#= @action_name %>">
+		<% @group.boards.each do |board| %>
+			<li id="side_nav_<%= board.name %>" 
+					class="<%= current_board_if(board.name, @board ? @board.name : nil) %>">
+				<%= link_to board.title, gb_path(board) %>
+			</li>
+		<% end %>
+	</ul>
+</div>
