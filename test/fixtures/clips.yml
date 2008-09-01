@@ -1,0 +1,13 @@
+clip1:
+  id: 1
+  post_id: 3
+  content_type: image/jpeg
+  filename: testimage.jpg
+  size: 1000
+  width: 640
+  height: 480
+  created_at: <%= 1.days.ago.to_s(:db) %>
+  
+clip2:
+  id: 2
+  post_id: 4

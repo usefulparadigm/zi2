@@ -1,0 +1,41 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+notice:
+  id: 1
+  name: notice
+  title: Notice
+  group_id: 1
+  posts_count: 1
+
+python:
+  id: 2
+  title: python
+  name: python
+  description: MyText
+  group_id: 2
+  posts_count: 1
+
+archive_ruby:
+  id: 3
+  name: archive_ruby
+  title: Archive Ruby
+  group_id: 2
+
+forum_ruby:
+  id: 4
+  name: forum_ruby
+  title: RubyForum
+  group_id: 3
+  posts_count: 1
+  
+forum_python:
+  id: 5
+  name: forum_python
+  title: Python Forum
+  group_id: 3   
+
+forum_erlang:
+  id: 6
+  name: forum_erlang
+  title: Erlang Forum
+  group_id: 3   

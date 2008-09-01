@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  body: MyText
+  ip: MyString
+  user_id: 1
+  post_id: 1
+  password: MyString
+
+two:
+  body: MyText
+  ip: MyString
+  user_id: 1
+  post_id: 1
+  password: MyString

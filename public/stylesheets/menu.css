@@ -1,0 +1,35 @@
+/******   H3    */
+#main ul#menu{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	width:auto;
+	position:relative;
+	display:block;
+	height:30px;
+	text-transform:uppercase;
+	font-size:12px;
+	font-weight:bold;
+	background:transparent url("/images/zi2/off.gif") repeat-x top left;
+	font-family: Helvetica,Arial,Verdana,sans-serif;
+	border-bottom:4px solid #004c99;
+	border-top:1px solid #74b0c6;
+}
+#main ul#menu li{
+	display:block;
+	float:left;
+	margin:0;
+	pading:0;}
+#main ul#menu li a{
+	display:block;
+	float:left;
+	color:#6d7078;
+	text-decoration:none;
+	font-weight:bold;
+	padding:6px 20px 0 20px;
+	height:24px;
+	background:transparent url("/images/zi2/divider.gif") no-repeat top right;
+	}
+#main ul#menu li a:hover, #main ul#menu li.current {
+	background:transparent url("/images/zi2/hover.gif") no-repeat top right;	
+	}

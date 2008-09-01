@@ -1,0 +1,105 @@
+/**
+ *
+ * IMPORTANT NOTE: these styles work in conjunction
+ * with the Blueprint CSS Framework http://code.google.com/p/blueprintcss/
+ * and will be very ugly if used just be themselves.
+ * 
+ */
+
+form.af_form {
+  border: 0px;
+  clear: left;
+  color: #222;
+}
+
+form.af_form.modal h1 {
+  padding-left: 0;
+}
+
+form.af_form h2, form.af_form legend {
+  width: 100%;
+  font-size: 133%;
+  border-bottom: 1px solid #ddd;
+}
+
+form.af_form div.set {
+  float: left;
+  clear: left;
+}
+
+form.af_form div.continue {
+  float: left;
+  clear: none;
+}
+
+form.af_form p.note {
+  clear: left;
+  font-style: italic;
+  width: 30%;
+  margin: 0.5em 0 0 0;
+  padding: 0.5em 0 0 0;
+}
+
+form.af_form fieldset {
+  border: 0px;
+  margin: 1em 0 0 0;
+  padding: 0;
+}
+
+form.af_form span.required_field {
+  font-weight: bold;
+  color: #CC3300;
+}
+
+form.af_form label, form.af_form div.label {
+  padding: 1em 0 0.2em;
+}
+
+form.af_form label, form.af_form select, form.af_form input, form.af_form button, form.af_form textarea, form.af_form div.label {
+  font-weight: normal;
+  margin-right: 1em;
+  clear: left;
+  float: left;
+}
+
+form.af_form div.set select {
+  clear: none;
+  margin-top: 1em;
+}
+
+form.af_form button {
+  font-size: 100%;
+  margin: 2em 0;  
+}
+
+form.af_form em {
+  clear: none;
+  float: left;
+  display: block;
+}
+
+form.af_form p.group {
+  margin-top: 1em;
+  text-align: left;
+}
+
+form.af_form div.set.check_box {
+  margin-top: 1em;
+}
+
+form.af_form div.set.radio_button label, 
+form.af_form div.set.radio_button input,
+form.af_form div.set.check_box label, 
+form.af_form div.set.cehck_box input {
+  float: left;
+  clear: none;
+  padding: 0;
+}
+
+form.af_form ol, form.af_form ul {
+  list-style-type: none;
+}
+
+form.af_form textarea {
+  height: 6em;
+}

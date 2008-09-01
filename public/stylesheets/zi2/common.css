@@ -1,0 +1,481 @@
+/* Overloading * Extending Blueprint */
+body { 
+	background-color: #fff; color: #333; 
+}
+input, textarea {font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;}
+textarea { width: 675px; height: 350px; }
+select { margin:0; padding 0; }
+.hidden { display: none; }
+.right { text-align: right; }
+.float.left { float: left; }
+.float.right { float: right; }
+p img { float: none; }
+label em { color: red; }
+li.empty { background: #eee; margin:0; padding: 10px; }
+
+/* Overloading Xquared */
+.xed {
+	font-family: none;
+	font-size: 1em;
+}
+.xed ol.code {
+	background-color: #eef;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+/* #header a { color: #fff; }
+#header a:visited { color: silver; }
+*/
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #aaaadd;
+  text-decoration: none;
+  color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+  border: 1px solid #000099;
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #000099;
+  font-weight: bold;
+  background-color: #000099;
+  color: #FFF;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  border: 1px solid #eee;
+  color: #ddd;
+}
+
+#header { 
+	margin-bottom: 10px;
+}
+
+#topmenu {
+	list-style: none;
+	text-align: right;
+	margin: 0;
+}
+#topmenu li {
+	display: inline;	
+	padding: 0 3px;
+}
+
+#footer {
+	margin-top: 10px;
+	padding: 5px 0;
+	border-top: 1px solid silver;
+	/*background-color: #eef;*/
+}
+
+#zi2link {
+	/*background: url(/images/zi2/bg_zi2.gif) no-repeat;*/
+	display: inline;
+	overflow: hidden;
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+}
+#zi2link a {
+	text-decoration: none;
+}
+#zi2link span {
+	color: blue;
+	font-weight: bold;
+}
+#zi2link span em {	color: red; }
+ 
+input.openid {
+	background: transparent url(/images/zi2/openid_bg.gif) no-repeat left center;
+	padding-left: 18px;
+}
+
+.comment textarea { height: 70px; }
+
+#post .title {
+	padding-top: 5px;
+	font-weight: bold;
+	font-size: 1.5em;
+	border-bottom: 1px solid silver;
+	color: navy;
+	padding-bottom: 3px;
+	margin-bottom: 3px;
+}
+
+#diggbox {
+	width: 60px;
+	height: 50px;
+	float: right;
+	background: #eef;
+	border: 2px solid gray;
+	text-align: center;
+}
+#diggbox h5 {
+	margin: 0; padding: 3px 0;	
+}
+#diggbox span {
+	font-size: 1.2em;	
+	font-weight: bold;
+	color: orange;
+}
+
+
+.tag {
+	padding-left: 18px;
+	background: transparent url(/images/zi2/tag.png) no-repeat top left;
+}
+
+td .sticky {
+	font-weight: bold;
+}
+
+h2.title {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 0 0 10px;
+	padding: 5px 10px;
+	border: 3px solid gray;	
+	background: #fff url(/images/zi2/bg_title_default.gif) no-repeat bottom right;
+}
+
+.sidebox {
+	margin-bottom: 10px;
+	border: 3px solid silver;	
+}
+
+.sidemenu {
+	margin: 0; padding: 0;
+	background: #FFD455;
+	list-style-type: none;
+	float: left; /* Contain floated list items */
+}
+.sidemenu li {
+	margin: 0; padding: 0;
+	float: left; width: 100%; /* This corrects the IE whitespace bug */
+}
+.sidemenu a {
+	display: block; /* to increase clickable area as a's default to inline */
+	text-decoration: none;
+	padding: 0 15px;
+	line-height: 2.5;
+	border-bottom: 2px solid #fff;
+}
+.sidemenu a:hover {
+	background-color: #de4231;
+	color: #fff;
+}
+
+.sideNav {
+	margin: 0; padding: 0;
+	background: #DEEFE7; /*#FFD455;*/
+	list-style-type: none;
+	float: left; /* Contain floated list items */
+}
+.sideNav li {
+	margin: 0; padding: 0;
+	float: left; width: 100%; /* This corrects the IE whitespace bug */
+}
+.sideNav a {
+	display: block; /* to increase clickable area as a's default to inline */
+	text-decoration: none;
+	padding: 0 15px;
+	line-height: 2.5;
+	border-bottom: 2px solid #fff;
+}
+.sideNav a:hover {
+	background-color: #0773DF; /* #de4231; */
+	color: #fff;
+}
+.sideNav li.current a {
+	background-color: #0773DF;;
+	font-weight: bold;
+	color: #fff;
+}
+
+#breadcrumb {
+	padding: 5px 10px;
+	margin: 5px 0;
+	border: 2px solid silver;
+	font-size: 1em;
+}
+
+#avatar img {
+	padding: 3px;
+	width: 100px;
+	height: 100px;	
+	border: 1px solid silver;
+}
+
+#avatar.thumb {
+	float: left;
+	width: 80px;
+}
+#avatar.thumb img {
+	margin: 5px;
+	padding: 2px;
+	width: 50px;
+	height: 50px;	
+}
+
+#profile ul {
+	list-style-type: none;
+	list-style-position: inside;
+	padding: 3px;
+}
+#profile li {
+	padding: 3px 0;
+	border-bottom: 1px dashed silver;
+}
+
+
+/* Styling Post Form */
+form#new_post, form#edit_post {
+	padding: 10px;
+	border: 1px solid silver;
+}
+form#new_post label, form#edit_post label { display: block; }
+div#titleArea, div#categoryArea {
+	float: left;
+	padding-right: 10px;
+}
+div#contentArea { clear: both; }
+div#attachArea { margin-bottom: 5px; }
+#clipList { 
+	margin: 0 0 5px;
+	padding: 10px;
+	border: 1px solid silver;
+	list-style: none;
+}
+#clipList div {
+	display: inline;
+	padding: 0 10px;
+}
+#clipList .add_to_content { 
+	padding-left: 20px;
+	background: url(/images/zi2/attachment.gif) no-repeat;
+}
+
+/*div#tagArea label { display: inline; }*/
+div#submitArea {
+	text-align: right;
+}
+img.indicator { vertical-align: middle; }
+
+/* Styling Post Content */
+
+#originalPost .postHeader {
+	margin-bottom: 20px;
+}
+#originalPost .titleAndUser {
+	margin: 10px 0 0; 
+	padding-top: 5px;
+	border-bottom: 1px solid silver;
+}
+#originalPost .title { float: left; }
+#originalPost .title h4 {
+	position: relative;
+	top: -5px;
+	margin: 0;
+	font-size: 1.5em;
+}
+#originalPost .userInfo {
+	text-align: right;
+	vertical-align: bottom;
+}
+#originalPost .tagList {
+	padding-left: 28px; 
+	color: gray;
+	background: url(/images/zi2/icon_tag.gif) no-repeat center left;
+}
+#originalPost .dateAndCount { 
+	text-align: right;
+}
+#originalPost .dateAndCount div { 
+	display: inline;
+	padding-left: 5px;
+	color: gray;
+}
+#originalPost .actionControl {
+	padding: 5px 0;
+	border-top: 1px solid silver;
+	text-align: right;
+}
+ul.attachments {
+	background-color: #f4f4f4;
+	list-style: none;
+	margin: 0 0 8px; 
+	padding: 5px;
+	border: 1px solid #efefef;
+}
+ul.attachments li {
+	display: inline;	
+}
+
+/* Post Reply */
+
+#reply_area #reply_list {
+	padding: 5px; 
+	margin: 0;
+	list-style: none;
+	margin-bottom: 10px;
+}
+#reply_area .reply {
+	border-bottom: 1px dashed silver;
+	padding-top: 10px;
+}
+#reply_area .author {
+	padding-left: 24px;
+	background: url(/images/zi2/icon_reply.gif) no-repeat;
+	float: left;
+	font-weight: bold;
+}
+#reply_area .date_and_ip {
+	float: right;
+}
+#reply_area .date_and_ip div {
+	display: inline;
+	padding-right: 5px;
+}
+#reply_area .body {
+	padding: 5px 20px 3px;
+	background: #fff;
+}
+#reply_area textarea {
+	width: 700px;
+	height: 80px;
+}
+
+/* User Profile Image */
+
+ul.profile_list {
+	list-style: none;
+	list-position: inside;
+	margin: 0;
+}
+div.profile {
+	float: left;
+	width: 200px;
+}
+ul.profile_list li {
+	padding: 0 3px;
+	clear: both;
+}
+div.profile_image {
+	border:1px solid silver;
+	display:inline;
+	float:left;
+	margin:0;
+	position:relative;
+	width:50px;
+}
+div.profile_image div.image {
+	height:50px;
+	width:50px;
+}
+div.profile_image div.name {
+	background-color:#797979;
+	color:#FFFFFF;
+	height: 16px;
+	margin-top: -18px;
+	opacity: 0.7;
+	overflow:hidden;
+	padding: 1px 0;
+	text-align: center;
+	text-indent:0pt;
+	width:50px;
+}
+div.profile_image div.name a, div.profile_image div.name a:hover {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+div.profile_image div.name:hover {
+	opacity: 0.9;
+}
+
+#my_friends { margin: 10px 0; }
+#my_friends > li {
+	margin: 5px 0;
+}
+#my_friends .avatar, #my_friends .recent_posts {
+	float: left;	
+}
+#my_friends .recent_posts .post {
+	list-style: none;
+	padding: 3px 0;
+	border-bottom: 1px dashed silver;
+	width: 500px;
+}
+
+/* Users */
+
+#new_user input[type=text], #new_user input[type=password]  {
+	width: 220px;
+}
+#new_user input[type=text].error, #new_user input[type=password].error  {
+	background: #fff;
+	padding: 3px; margin: 0;
+	border: 2px solid red;
+}
+#new_user label.error  {
+	background: #fff;
+	padding: 3px; margin: 0;
+	border: 0;
+}
+#new_user label.error.checked {
+	padding-left: 30px;
+	background: url(/images/zi2/icon_checked.gif) no-repeat center;
+}
+

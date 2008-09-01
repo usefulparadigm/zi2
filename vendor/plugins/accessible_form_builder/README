@@ -1,0 +1,127 @@
+AccessibleFormBuilder
+===================
+
+http://github.com/jlindley/accessible_form_builder
+git://github.com/jlindley/accessible_form_builder.git
+
+Now with optional Blueprint CSS Framework integration!
+
+Note: previous version of this plugin used names prefixes like a_form_for. This version uses the af_ prefix instead, because a_ had false semantic/generic meanings.
+
+This plugin is based upon pretty_accessible_form from http://machinesmonstersandmadness.com/svn/plugins/trunk/pretty_accessible_form
+and additionally on accessible_form_builder http://github.com/shift/accessible_form_builder
+with technical inspiration from Rick Olsen's labeled form builder http://svn.techno-weenie.net/projects/plugins/labeled_form_helper/
+
+== Installation
+
+git clone git://github.com/jlindley/accessible_form_builder.git vendor/plugins/accessible_form_builder
+
+== Basic Usage
+
+Here's an example usage:
+  <% af_form_for :user, :url => users_path, :legend => "Login Details" do |f| %>
+    <%= f.text_field :login, :label => "Username", :note => "This is visible to other users", :required => true %>
+    <%= f.password_field :password, :label => "Password", :required => true %>
+    <%= f.password_field :password_confirmation, :label => "Confirm Password", :required => true %>
+    <%= f.separator "Personal Details" %>
+    <%= f.text_field :firstname, :label => "First name", :required => true %>
+    <%= f.text_field :lastname, :label => "Last name", :required => true %>
+    <%= f.text_field :email, :label => "E-Mail", :required => true %>
+    <%= f.separator "Location Details" %>
+    <%= f.text_field :address, :label => "Location", :note => "(eg. New York, 90210, SE1 3SR)", :required => true %>
+    <%= f.submit "Sign up" %>
+  <% end %>
+
+== Blueprint Usage
+
+Blueprint CSS Framework: http://code.google.com/p/blueprintcss
+
+To use the Blueprint Grid integration, please first download and put in place Blueprint (at minimum, the reset.css and grid.css files) and make sure to include this plugin's grid_forms.css into your layout's head.
+
+All Blueprint grid classes can be simply added via the options hash.
+
+  f.text_field :title, :label => 'My Title', :span => 4, :push => 2, :last => true
+  # Will wrap the code in a column with classes: 'span-4 push-2 last'
+
+  f.text_field :tag, :continue => true
+  # not Blueprint specific, but with the included grid_forms.css stylesheet will
+  # put the field and label in horizontal alignment with the previous field and label
+  # ie, continue across the page, don't break to a new line.
+
+The included sample css should build off Blueprint solidly, but is not presented as a solution to all form layout issues. You'll probably need to add your own CSS and solve issues. If you find a better way to handle the form css, please submit a patch and I'll update the plugin.
+
+Note: this plugin creates forms which lineup horizontally with the Blueprint grid, but the form stylesheet does not provide a good match to the typographic (vertical) grid. If you can help me out on that, please submit patches.
+
+Bugs, patches, comments: http://github.com/jlindley/accessible_form_builder
+
+== Misc Features / Notes
+
+1. If you're using accessible_form_builder, but in a particular case field would like to use one of the builtin Rails field helpers (ie, text_field), it's available prefixed with bare_
+
+  # fancy
+  f.text_field :login, :label => "Username", :note => "This is visible to other users", :required => true
+
+  # plain, no label, wrappers, etc
+  f.bare_text_field :login
+
+You'll need to provide your own labels, styling, etc in that case
+
+2. The set of label, input, notes, etc, is wrapped in a div. This div has the class 'set' applied to it, and additionally a class that gives the name of the type of element it contains. The structure looks like this:
+
+  <div class="text_field set">
+    <label for="student[local_address_attributes][]_directions">Directions</label>
+    <input id="student_local_address_attributes__directions" 
+           name="student[local_address_attributes][][directions]" size="30" type="text" />
+     <em class="note">Give specific directions.</em>
+  </div>
+
+The form/fieldset itself will have the classes 'af_form' and 'container' applied.
+
+This should provide enough style hooks for 99% of cases.
+
+3. Don't call fields_for inside of a form using this builder, unless you set the builder explicitly to AccessibleFormBuilder, instead, use af_fields_for.
+
+== Known Issues and Future Plans
+
+  * Add Rails model error integration.
+
+  * Yuck: will not work with Rails 2.0 style simple form calls (this will be fixed shortly)
+
+    af_form_for(@student) # does not really work
+    af_form_for(:student, :url => blah blah blah, blah blah) # need all this
+
+  * Full Rails 2.0 compatibility check run through needed (underway).
+
+  * Specs are totally missing at this point. 
+    Forked plugin didn't have them but they will be added. Probably.
+
+  * grid_forms.css does not align elements to a typographic baseline.
+
+  * Problems with grid_forms.css and Internet Explorer.
+
+  * Radio and check boxes are always placed vertically, 
+    need option to align in a row and label the group of them.
+
+  * select inputs are always horizontally floated next to labels, need
+    an option to break down to the next line.
+
+4. The width of the form is currently expanded to match the width of the Blueprint container. Options are being explored to customize this.
+
+== Credits
+
+Original idea from A List Aparts "Prettier Accessible Forms"
+http://alistapart.com/articles/prettyaccessibleforms
+
+Rails implementation of pretty_accessible_form is copyright 2007, 2008 by 
+Matt Williams http://machinesmonstersandmadness.com/svn/plugins/trunk/pretty_accessible_form
+
+Fixing of :required, validating markup and :note by Vincent Palmer 2008.
+For more information contact "shiftEMAILrwvhp.com".gsub!('EMAIL', '@').
+
+Refactoring out code duplication, addition of bare_ methods,
+Blueprint integration, af_fields_for, and sample CSS file
+by Jim Lindley 2008 http://jimlindley.com web@jimlindley.com
+
+== License
+
+This plugin is covered under the MIT License.
