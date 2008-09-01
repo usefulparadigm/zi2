@@ -1,13 +1,8 @@
 <div>
 <ul id='menu'>
-	<li class="<%= menu_current('home') %>"><a href="/home" >Home</a></li>
-	<li class="<%= menu_current('archive') %>"><a href="/archive" >자료실</a></li>
-	<li class="<%= menu_current('forum') %>"><a href="/forum" >포럼</a></li>
-	<li class="<%= menu_current('community') %>"><a href="/community" >커뮤니티</a></li>
-	<!-- Customize this tags with your own! 
-	<li><a href="/group_name" class="<%= menu_current('group_name') %>">GroupName</a></li>
-	<li><a href="/group_name" class="<%= menu_current('group_name') %>">GroupName</a></li>
-	<li><a href="/group_name" class="<%= menu_current('group_name') %>">GroupName</a></li>
-	-->
+	<!-- Use hard-coding instead of this when production-ready -->
+	<% Group.all.each do |group| %>
+		<li class="<%= menu_current(group.name) %>"><a href="/<%= group.name %>"><%= group.title %></a></li>
+	<% end %>	
 </ul>
 </div>

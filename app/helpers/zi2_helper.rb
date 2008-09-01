@@ -82,7 +82,7 @@ module Zi2Helper
 	end
 	
 	def list_view?
-		(controller.action_name == 'list') || (@board_name == nil)
+		(controller.action_name == 'list') || !@board
 	end
 	
 	def render_zi2_list
