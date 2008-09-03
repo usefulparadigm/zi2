@@ -1,0 +1,6 @@
+<div>
+	<ul class="sideNav additional" id="<%= controller.action_name %>">
+		<li id="users_show"><%= link_to '내 프로파일', user_path(current_user) %></li>
+		<li id="users_friendship" class="current"><%= link_to '지인 관리', user_friendships_path(@user) %></li>
+	</ul>
+</div>
