@@ -3,7 +3,7 @@
 	<% if logged_in? %>
 		|<li><%= link_to current_user, user_path(current_user.to_s) %></li>
 		<% if current_user.admin? %>
-			|<li><%= link_to '관리자', admin_path %></li>
+			|<li><%= link_to '사이트 관리', admin_path %></li>
 		<% end %>
 		|<li><%= link_to '로그아웃', session_path, :method => :delete %></li>
 	<% else %>

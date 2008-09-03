@@ -196,28 +196,6 @@ h2.title {
 	border: 3px solid silver;	
 }
 
-.sidemenu {
-	margin: 0; padding: 0;
-	background: #FFD455;
-	list-style-type: none;
-	float: left; /* Contain floated list items */
-}
-.sidemenu li {
-	margin: 0; padding: 0;
-	float: left; width: 100%; /* This corrects the IE whitespace bug */
-}
-.sidemenu a {
-	display: block; /* to increase clickable area as a's default to inline */
-	text-decoration: none;
-	padding: 0 15px;
-	line-height: 2.5;
-	border-bottom: 2px solid #fff;
-}
-.sidemenu a:hover {
-	background-color: #de4231;
-	color: #fff;
-}
-
 .sideNav {
 	margin: 0; padding: 0;
 	background: #DEEFE7; /*#FFD455;*/
@@ -244,6 +222,16 @@ h2.title {
 	font-weight: bold;
 	color: #fff;
 }
+
+.sideNav.additional {
+	background: #FFD455;
+}
+.sideNav.additional a:hover, .sideNav.additional li.current a {
+	background-color: #de4231;
+	color: #fff;
+}
+
+
 
 #breadcrumb {
 	padding: 5px 10px;
@@ -274,12 +262,18 @@ h2.title {
 	list-style-type: none;
 	list-style-position: inside;
 	padding: 3px;
+	margin-bottom: 10px;
 }
 #profile li {
 	padding: 3px 0;
 	border-bottom: 1px dashed silver;
 }
 
+/* Post list/index */
+table .sticky {
+	padding-left: 28px;
+	background: url(/images/zi2/icon_notice.gif) no-repeat top left;
+}
 
 /* Styling Post Form */
 form#new_post, form#edit_post {
@@ -348,6 +342,11 @@ img.indicator { vertical-align: middle; }
 	padding-left: 5px;
 	color: gray;
 }
+
+#originalPost .contentBody {
+	font-size: 1em;
+}
+
 #originalPost .actionControl {
 	padding: 5px 0;
 	border-top: 1px solid silver;
@@ -445,7 +444,7 @@ div.profile_image div.name:hover {
 	opacity: 0.9;
 }
 
-#my_friends { margin: 10px 0; }
+#my_friends { margin: 10px 0 20px; }
 #my_friends > li {
 	margin: 5px 0;
 }

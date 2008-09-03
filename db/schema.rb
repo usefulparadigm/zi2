@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080814064342) do
+ActiveRecord::Schema.define(:version => 20080902152123) do
 
   create_table "boards", :force => true do |t|
     t.string   "title"
@@ -73,6 +73,13 @@ ActiveRecord::Schema.define(:version => 20080814064342) do
     t.string  "salt",       :null => false
   end
 
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -87,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20080814064342) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "board_id"
+    t.integer  "open_level",                  :default => 99
   end
 
   create_table "replies", :force => true do |t|
@@ -98,6 +106,13 @@ ActiveRecord::Schema.define(:version => 20080814064342) do
     t.string   "password"
     t.string   "homepage"
     t.boolean  "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,7 +144,6 @@ ActiveRecord::Schema.define(:version => 20080814064342) do
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
-    t.boolean  "admin",                                   :default => false
   end
 
 end

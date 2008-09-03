@@ -1,5 +1,6 @@
 <%= page_title "내 지인 목록" %>
 <ul id="my_friends" class="profile_list">
+<%= empty_msg @friends -%>
 <% @friends.each do |friend| %>
 	<li>
 		<div class="avatar">
@@ -14,7 +15,7 @@
 				<% friend.posts.recent(2).each do |post| %>
 					<li class="post">
 						<span class="created_at">[<%= post.created_at.to_date.to_s(:db) %>]</span>
-						<%= post.title %>
+						<%= link_to post.title, gbp_path(post) %>
 					</li>
 				<% end %>
 			<% end %>
@@ -27,21 +28,23 @@
 <div class="span-9">
 	<%= page_title "내게 지인맺기를 요청한 사람들(for me)" %>
 	<ul id="pendings_for_me" class="profile_list">
-	<% @pendings_for_me.each do |person| %>
-		<li>
-			<div class="profile">
-			<%#= user_link(person) %>
-			<%= render :partial => 'users/profile', :object => person %>
-			<%= button_link_to '수락', accept_user_friendship_path(@user, person), :method => :put %>
-			</div>
-		</li>
-	<% end %>
+		<%= empty_msg @pendings_for_me -%>
+		<% @pendings_for_me.each do |person| %>
+			<li>
+				<div class="profile">
+				<%#= user_link(person) %>
+				<%= render :partial => 'users/profile', :object => person %>
+				<%= button_link_to '수락', accept_user_friendship_path(@user, person), :method => :put %>
+				</div>
+			</li>
+		<% end %>
 	</ul>
 </div>
 
 <div class="span-9 last">
 	<%= page_title "내가 지인맺기를 요청한 사람들(by me)" %>
 	<ul id="pendings_by_me" class="profile_list">
+	<%= empty_msg @pendings_by_me -%>
 	<% @pendings_by_me.each do |person| %>
 		<li>
 			<%= render :partial => 'users/profile', :object => person %>

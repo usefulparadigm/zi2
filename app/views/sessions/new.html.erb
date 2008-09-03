@@ -1,4 +1,4 @@
-<h2 class="titlebox">로그인</h2>
+<%= page_title '로그인' %>
 
 <% form_tag session_path do -%>
 <p><label for="login">Login</label><br/>
@@ -19,5 +19,5 @@
 <%= check_box_tag 'remember_me' %></p>
 -->
 
-<p><%= submit_tag '로그인' %></p>
+<p><span class="button"><%= submit_tag '로그인' %></span></p>
 <% end -%>

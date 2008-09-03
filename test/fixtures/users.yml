@@ -23,3 +23,7 @@ admin:
 tester:
   id: 4
   login: tester
+
+someone:
+  id: 5
+  login: someone

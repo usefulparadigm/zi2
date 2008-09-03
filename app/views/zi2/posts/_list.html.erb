@@ -1,10 +1,12 @@
 <div>
-	<%= render :partial => 'total_rss' %>
-	<table>
+	<%= render :partial => 'zi2/posts/total_rss' %>
+	<table id="posts_list">
 	  <tr>
 	    <th><%= s :board_id, :label => '게시판' %></th>
 	    <th><%= s :'posts.title', :label => '제목' %></th>
-	    <th><%= s :user_id, :label => '작성자' %></th>
+			<% unless controller.controller_name == 'users' %>
+	    	<th><%= s :user_id, :label => '작성자' %></th>
+			<% end %>
 	    <th><%= s :replies_count, :label => '댓글', :descend => true %></th>
 	    <th><%= s :read_count, :label => '조회', :descend => true %></th>
 	    <th><%= s :diggs_count, :label => '추천', :descend => true %></th>

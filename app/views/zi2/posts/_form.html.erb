@@ -44,23 +44,14 @@
 
 <div id="titleArea">
 	<%= form.label :title, '제목' %>
-	<%= form.text_field :title, :size => 70 %>
+	<%= form.text_field :title, :size => 80 %>
 </div>
-<div id="categoryArea">
-  <%= form.label :category_id, '분류' %>
-	<!--select name="post[category_id]">
-	  <%#= expand_tree_into_select_field(Category.top, params[:category_id]) %>
-	</select-->
+
+<div id="publicArea" class="right">
+  <%= form.label :open_level, '공개도' %>
+	<%= form.select :open_level, OpenLevel.options.reverse %>
 </div>
-<div id="publicArea">
-  <%= form.label :category_id, '공개도' %>
-	<select name="category_id">
-		<option>전체공개</option>
-		<option>회원공개</option>
-		<option>지인공개</option>
-		<option>비밀글</option>
-	</select>
-</div>
+
 <div id="contentArea">
 	<%= form.label :content, '내용' %>
 	<%= form.text_area :content, :id => 'xq_editor', :rows => 10 %>

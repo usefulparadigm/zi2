@@ -21,5 +21,11 @@ class PostsControllerTest < ActionController::TestCase
     }
     #assert_not_nil assigns(:clip)
   end
-  
+
+  def test_should_not_show_filtered_post
+    login_as 'tester'
+    post = posts(:friends_only)
+    get :show, :id => 4, :board => post.board.name
+    assert_response :redirect
+  end
 end

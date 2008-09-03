@@ -2,8 +2,10 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
 	has_many :posts
 	has_many :replies
-	#has_many :permissions, :dependent => :destroy
-	#has_many :roles, :through => :permissions
+
+	has_many :permissions, :dependent => :destroy
+	has_many :roles, :through => :permissions
+
   has_attached_file :avatar, 
 									  :url => "/:class/:attachment/:id/:style_:basename.:extension",
 										:path => ":rails_root/public/:class/:attachment/:id/:style_:basename.:extension",
@@ -80,16 +82,16 @@ class User < ActiveRecord::Base
   end
 
   
-#	def has_role?(rolename)
-#		self.roles.find_by_name(rolename) ? true : false
-#	end  
-#	
-#	def admin?
-#		self.has_role?('Administrator')
-#	end
+	def has_role?(role_name)
+		roles.find_by_name(role_name) ? true : false
+	end  
+
+	def admin?; has_role?('admin') end
 
 	def to_s; login end
 	def to_param; login end
+  def has_friends?; !friends.empty? end
+  def me_and_friends; [self] + friends end
 
   protected
     # before filter 

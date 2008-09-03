@@ -10,32 +10,32 @@ class Zi2::PostsController < ApplicationController
 
 	# GET /group
 	def list
-  	order = params[:sort] unless params[:sort].blank?
-	  @posts = Post.group(@group.name).paginate :per_page => PER_PAGE, :page => params[:page], :order => order
-	 	@post_total = @group.boards.inject(0) { |count, board| count += board.posts_count }
-	 	@title = @group.title
+	  real_list
+	  render_to_respond('list')
 	end	
 
 	# GET	/group/board
 	def index
 	 	@title = @group.title + ' - ' + @board.title
  	  send(@board.name.to_sym)
- 	  render :action => @board.name
+ 	  render_to_respond(@board.name)
   rescue
  	  real_index
  	  begin 
- 	    render :action => @board.name 
+   	  render_to_respond(@board.name)
  	  rescue ActionView::MissingTemplate
- 	    render :action => 'index'
+ 	    render_to_respond('index')
     end
 	end
 
   # GET /group/board/id
   def show
-    @post = Post.find(params[:id], :include => :replies)
-  	@post.increment!(:read_count)		
+    @post = Post.filter(current_user).find(params[:id], :include => :replies)
+	  @post.increment!(:read_count)
   	set_group_board
-  	@title = false
+  	@title = ''
+  rescue ActiveRecord::RecordNotFound	
+    redirect_to root_path
   end
 
   # GET /group/board/new
@@ -57,8 +57,8 @@ class Zi2::PostsController < ApplicationController
     #@post.update_attribute :clips_count, @post.clips.count
     #@post.increment :clips_count, @post.clips.count
     if @post.save
-      flash[:notice] = 'Post was successfully created.'
-      redirect_to gb_path(@post.board)
+      #flash[:notice] = 'Post was successfully created.'
+      redirect_to gbp_path(@post)
     else
       set_group_board
       render :action => 'new'
@@ -71,8 +71,8 @@ class Zi2::PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        flash[:notice] = 'Post was successfully updated.'
-        format.html { redirect_to gb_path(@post.board) }
+        #flash[:notice] = 'Post was successfully updated.'
+        format.html { redirect_to gbp_path(@post) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -116,21 +116,44 @@ class Zi2::PostsController < ApplicationController
 		end
 	end
 
+  def digg
+		@post = Post.find(params[:id])
+		unless @post.digg! request.remote_addr, current_user
+  	  flash[:alert] = '이미 추천한 포스트입니다!'
+		end  
+	  redirect_to :back  	
+	end
+	
+	# TBD
+  def search
+  	unless params[:q].blank?
+			all_posts = Post.search(params[:q]) 
+			@post_total = all_posts.size
+			@categories = Category.fetch_all(all_posts)	 
+			@posts = Post.paginate_search(params[:q], nil, 
+																		:order => 'updated_at DESC', 
+																		:page => params[:page], :per_page => 10) 
+			render :action => 'index'
+		else
+			redirect_to :back
+		end
+	end
 
-  # TODO: Refactoring!
 	def catch_all
 		@group_name, @board_name, @post_id = params[:path]
 		unless @board_name
+		  @group_name, params[:format] = $1, $2 if @group_name =~ /(.*?)\.(.*)/
 		  @group = Group.find_by_name(@group_name, :include => :boards)
 		  @boards = @group.boards
-			list
-			render :action => 'list'
+			real_list
+			render_to_respond('list')
 		else
+		  @board_name, params[:format] = $1, $2 if @board_name =~ /(.*?)\.(.*)/
 		  @board = Board.find_by_name(@board_name)
 		  @group = @board.group	
 			unless @post_id
 				real_index
-				render :action => 'index'
+				render_to_respond('index')
 			else
 				case @post_id 
 				when 'new'
@@ -147,26 +170,25 @@ class Zi2::PostsController < ApplicationController
 		end		
 	end
 
-  private
+  protected
+
+  def real_list
+  	order = params[:sort] unless params[:sort].blank?
+	  @posts = Post.group(@group.name).filter(current_user).paginate :per_page => PER_PAGE, :page => params[:page], :order => order
+	 	@post_total = @group.boards.inject(0) { |count, board| count += board.posts_count }
+	 	@title = @group.title
+  end  
 
   def real_index
 		page = params[:page] ? params[:page].to_i : 1
   	order = params[:sort] unless params[:sort].blank?
-		@posts = Post.board(@board.name).paginate :per_page => PER_PAGE, :page => page, :order => order
+		@posts = Post.board(@board.name).filter(current_user).paginate :per_page => PER_PAGE, :page => page, :order => order
     @post_total = @board.posts_count 
 		@start_no = @post_total - ((page-1) * PER_PAGE)
   end
   
-  def get_gbp
-    @board ||= Board.find_by_name(params[:board]) unless params[:board].blank?
-    @group ||= Group.find_by_name(controller_name, :include => :boards)
-  end
+  private
   
-  def set_gbp
-    @post = Post.find(params[:id])
-    @group, @board = @post.group, @post.board 
-  end
-
   def set_group_board
     if @post 
       @group, @board = @post.group, @post.board
@@ -175,35 +197,11 @@ class Zi2::PostsController < ApplicationController
       @group ||= @board ? @board.group : Group.find_by_name(controller_name)
     end
   end
-
   
-#  def set_group_board
-#    if @post 
-#      @group, @board = @post.group, @post.board
-#    else
-#      @group ||= Group.find_by_name(controller_name)
-#      @board ||= Board.find_by_name(params[:board], :include => :group) unless params[:board].blank?
-#    end
-#  end
-
-	def get_group_and_boards
-		set_gbp
-		@group ||= Group.find_by_name(@group_name, :include => :boards)
-		@boards = @group.boards
-		@title = @group.title
-	end
-	
-	def get_board_and_group
-		set_gbp
-		@board ||= Board.find_by_name(@board_name, :include => :group)
-		@group = @board.group
-		@title = @group.title + ' - ' + @board.title
-	end
-	
-	#def set_gbp
-	#	@group_name ||= controller_name
-	#	@board_name ||= params[:board] #(params[:real_action] || action_name)
-	#	@post_id ||= params[:id]
-	#end
-  
+  def render_to_respond(action_name)
+    respond_to do |format|
+      format.html { render :action => action_name }
+      format.rss { render :layout => false, :action => 'index' }
+    end
+  end
 end

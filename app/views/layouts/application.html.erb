@@ -49,6 +49,9 @@
 			</div>
 	  </div>
 	</div>
+	
+	<!-- General alerting.. USE flash[:alert] -->
+	<%= javascript_tag "alert('#{flash[:alert]}')" if flash[:alert] %>
 
 </body>
 </html>

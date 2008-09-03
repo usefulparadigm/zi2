@@ -17,4 +17,10 @@ three:
   title: I am Rubyst!
   board_id: 3
   user_id: 3
-  
+
+friends_only:
+  id: 4
+  title: Friends Only!
+  board_id: 3
+  user_id: 3 # admin
+  open_level: <%= OpenLevel::FRIENDS_ONLY %>  

@@ -14,11 +14,13 @@ class Post < ActiveRecord::Base
 
 	attr_writer :uploaded_attachments
 
+
+  named_scope :filter, lambda { |user| {:conditions => build_conditions(user) }}
+
   named_scope :group, lambda { |group_name| {:include => {:board => :group}, :conditions => ['groups.name = ?', group_name.to_s], :order => 'sticky DESC, posts.created_at DESC'} }
   named_scope :board, lambda { |board_name| {:include => {:board => :group}, :conditions => ['boards.name = ?', board_name.to_s], :order => 'sticky DESC, posts.created_at DESC'} }
 
   def group; board.group end
-
 
 	# Some Named_scopes
   Board.all(:select => 'id, name').each do |board|
@@ -57,13 +59,23 @@ class Post < ActiveRecord::Base
 		end
 	end
 
-	def to_s; title; end
+	def to_s; title end
 
 private
 
+  def self.build_conditions(user)  
+    conditions = "open_level=#{OpenLevel::PUBLIC} "
+    if user
+      conditions += "OR open_level=#{OpenLevel::MEMBERS_ONLY} "
+      conditions += "OR (open_level=#{OpenLevel::FRIENDS_ONLY} AND user_id IN (#{user.me_and_friends.map(&:id).join(',')})) "
+      conditions += "OR (open_level=#{OpenLevel::PRIVATE} AND user_id=#{user.id}) "
+    end  
+    conditions
+  end
+
 	def digged_by?(ip, digger = nil)
 		if digger && !digger.id.nil?
-			return diggs.count(:conditions => ['user_id = ? or ip = ?', digger.id, ip]) > 0
+			return diggs.count(:conditions => ['user_id = ? and ip = ?', digger.id, ip]) > 0
 		else
 			return diggs.count(:conditions => ['ip = ?', ip]) > 0
 		end

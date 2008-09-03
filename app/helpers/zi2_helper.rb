@@ -96,4 +96,9 @@ module Zi2Helper
 	  post.created_at.year == Time.now.year ? post.created_at.to_s(:kmd) : post.created_at.to_s(:kymd)
   end	
   
+  def empty_msg(collection, tag=:li, msg='항목이 없습니다.')
+    content_tag tag, :class => 'empty' do 
+      msg
+    end if collection.empty?
+  end
 end

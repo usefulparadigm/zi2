@@ -1,9 +1,3 @@
-
-	<!--div id="diggbox">
-		<h5><%#= link_to '추천', digg_post_path(@post), :method => :put %></h5>
-		<span><%= @post.diggs.count %></span>
-	</div-->
-
 <div id="originalPost">
 	<div class="postHeader">
 		<div class="titleAndUser">
@@ -17,8 +11,9 @@
 		</div>
 		<div class="tagList float left"><%= @post.tag_list.join(', ') %></div>
 		<div class="dateAndCount">
-		  <div class="commentCount">댓글수: <%#= @post.comments_count %></div>
-		  <div class="readCount">조회수: <%= @post.read_count %></div>
+		  <div class="commentCount">댓글: <%= @post.replies_count %></div>
+		  <div class="readCount">조회: <%= @post.read_count %></div>
+		  <div class="diggCount"><%= link_to '추천', digg_post_path(@post), :method => :put %>: <%= @post.diggs.size %></div>
 		  <div class="date">작성일: <%= @post.created_at.to_s(:klong) %></div>
 		</div>
 		<div class="clear"></div>
